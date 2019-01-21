@@ -12,7 +12,6 @@ use Traversable;
 use Rhumsaa\Uuid\Uuid;
 use Zend\Paginator\Adapter\DbTableGateway as TableGatewayPaginator;
 use Zend\Stdlib\ArrayUtils;
-use Account\V1\Rest\User\UserCollection as Collection;
 use Account\V1\Rest\User\UserEntity as Entity;
 use Account\V1\Rest\User\UserTableGateway as TableGateway;
 
@@ -91,9 +90,9 @@ class UserTableGatewayMapper implements UserMapperInterface
             throw new DomainException('Invalid identifier provided', 404);
         }
 
-        $resultSet = $this->table->select(['id' => $id]);
-        if (0 === count($resultSet)) {
-            throw new DomainException('Status message not found', 404);
+        $resultSet = $this->table->select([$this->identifierName => $id]);
+        if (0 === $resultSet->count()) {
+            throw new DomainException('Item not found', 404);
         }
         return $resultSet->current();
     }
