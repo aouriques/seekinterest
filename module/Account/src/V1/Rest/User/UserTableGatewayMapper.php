@@ -10,7 +10,7 @@ use DomainException;
 use InvalidArgumentException;
 use Traversable;
 use Rhumsaa\Uuid\Uuid;
-use Zend\Paginator\Adapter\DbTableGateway;
+use Zend\Paginator\Adapter\DbTableGateway as TableGatewayPaginator;
 use Zend\Stdlib\ArrayUtils;
 use Account\V1\Rest\User\UserCollection as Collection;
 use Account\V1\Rest\User\UserEntity as Entity;
@@ -22,16 +22,30 @@ use Account\V1\Rest\User\UserTableGateway as TableGateway;
 class UserTableGatewayMapper implements UserMapperInterface
 {
     /**
+     * @var string Name of collection class
+     */
+    protected $collectionClass;
+
+    /**
+     * @var string Name of identifier field
+     */
+    protected $identifierName;
+
+    /**
      * @var TableGateway
      */
     protected $table;
 
     /**
      * @param TableGateway $table
+     * @param string $identifierName
+     * @param string $collectionClass
      */
-    public function __construct(TableGateway $table)
+    public function __construct(TableGateway $table, $identifierName, $collectionClass)
     {
-        $this->table = $table;
+        $this->table           = $table;
+        $this->identifierName  = $identifierName;
+        $this->collectionClass = $collectionClass;
     }
 
     /**
@@ -89,7 +103,8 @@ class UserTableGatewayMapper implements UserMapperInterface
      */
     public function fetchAll()
     {
-        return new Collection(new DbTableGateway($this->table, null, ['timestamp' => 'DESC']));
+        $adapter = new TableGatewayPaginator($this->table);
+        return new $this->collectionClass($adapter);
     }
 
     /**

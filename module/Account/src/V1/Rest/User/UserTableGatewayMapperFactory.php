@@ -12,15 +12,19 @@ class UserTableGatewayMapperFactory
     {
         $tableService = null;
         $tableMapper = null;
+        $identifierName = null;
+        $collectionClass = null;
         if ($services->has('config')) {
             $config = $services->get('config');
             if ( isset($config['module-db-config']) && isset($config['module-db-config'][__NAMESPACE__])) {
                 $container = $config['module-db-config'][__NAMESPACE__];
                 $tableService = $container['table_service'];
                 $tableMapper = $container['table_mapper'];
+                $identifierName = $container['entity_identifier_name'];
+                $collectionClass = $container['collection_class'];
             }
         }
 
-        return new $tableMapper($services->get($tableService));
+        return new $tableMapper($services->get($tableService), $identifierName, $collectionClass);
     }
 }

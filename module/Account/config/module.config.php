@@ -107,6 +107,7 @@ return [
             'table_name' => 'users',
             'hydrator_name' => \Zend\Hydrator\ObjectPropertyHydrator::class,
             'entity_identifier_name' => 'id',
+            'collection_class' => 'Account\\V1\\Rest\\User\\UserCollection',
             'table_service' => 'Account\\V1\\Rest\\User\\UserTableGateway',
             'table_mapper' => 'Account\\V1\\Rest\\User\\UserTableGatewayMapper',
         ],
