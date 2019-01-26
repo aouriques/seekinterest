@@ -23,6 +23,7 @@ return [
         'authentication' => [
             'map' => [
                 'Account\\V1' => 'oauth',
+                'Interest\\V1' => 'oauth',
             ],
         ],
     ],

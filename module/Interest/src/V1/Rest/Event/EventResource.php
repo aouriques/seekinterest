@@ -1,24 +1,11 @@
 <?php
-namespace Account\V1\Rest\User;
+namespace Interest\V1\Rest\Event;
 
-use Account\V1\Rest\User\UserMapperInterface as MapperInterface;
 use ZF\ApiProblem\ApiProblem;
 use ZF\Rest\AbstractResourceListener;
 
-class UserResource extends AbstractResourceListener
+class EventResource extends AbstractResourceListener
 {
-
-    protected $mapper;
-
-    /**
-     * UserResource constructor.
-     * @param MapperInterface $mapper
-     */
-    public function __construct(MapperInterface $mapper)
-    {
-        $this->mapper = $mapper;
-    }
-
     /**
      * Create a resource
      *
@@ -27,7 +14,7 @@ class UserResource extends AbstractResourceListener
      */
     public function create($data)
     {
-        return $this->mapper->create($data);
+        return new ApiProblem(405, 'The POST method has not been defined');
     }
 
     /**
@@ -60,7 +47,7 @@ class UserResource extends AbstractResourceListener
      */
     public function fetch($id)
     {
-        return $this->mapper->fetch($id);
+        return new ApiProblem(405, 'The GET method has not been defined for individual resources');
     }
 
     /**
@@ -71,7 +58,7 @@ class UserResource extends AbstractResourceListener
      */
     public function fetchAll($params = [])
     {
-        return $this->mapper->fetchAll();
+        return new ApiProblem(405, 'The GET method has not been defined for collections');
     }
 
     /**
@@ -116,7 +103,7 @@ class UserResource extends AbstractResourceListener
      * @return ApiProblem|mixed
      */
     public function update($id, $data)
-    {die('update');
-        return $this->mapper->update($id, $data);
+    {
+        return new ApiProblem(405, 'The PUT method has not been defined for individual resources');
     }
 }

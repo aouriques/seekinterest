@@ -1,11 +1,11 @@
 <?php
-namespace Account\V1\Rest\User;
+namespace Interest\V1\Rest\Interest;
 
-use Account\V1\Rest\User\UserMapperInterface as MapperInterface;
+use Interest\V1\Rest\Interest\InterestMapperInterface as MapperInterface;
 use ZF\ApiProblem\ApiProblem;
 use ZF\Rest\AbstractResourceListener;
 
-class UserResource extends AbstractResourceListener
+class InterestResource extends AbstractResourceListener
 {
 
     protected $mapper;
@@ -71,7 +71,7 @@ class UserResource extends AbstractResourceListener
      */
     public function fetchAll($params = [])
     {
-        return $this->mapper->fetchAll();
+        return $this->mapper->fetchAll($params);
     }
 
     /**
@@ -116,7 +116,7 @@ class UserResource extends AbstractResourceListener
      * @return ApiProblem|mixed
      */
     public function update($id, $data)
-    {die('update');
-        return $this->mapper->update($id, $data);
+    {
+        return new ApiProblem(405, 'The PUT method has not been defined for individual resources');
     }
 }

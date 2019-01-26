@@ -4,7 +4,7 @@
  * @copyright Copyright (c) 2014 Zend Technologies USA Inc. (http://www.zend.com)
  */
 
-namespace Account\V1\Rest\User;
+namespace Interest\V1\Rest\Interest;
 
 use DomainException;
 use InvalidArgumentException;
@@ -12,13 +12,13 @@ use Traversable;
 use Rhumsaa\Uuid\Uuid;
 use Zend\Paginator\Adapter\DbTableGateway as TableGatewayPaginator;
 use Zend\Stdlib\ArrayUtils;
-use Account\V1\Rest\User\UserEntity as Entity;
-use Account\V1\Rest\User\UserTableGateway as TableGateway;
+use Interest\V1\Rest\Interest\InterestEntity as Entity;
+use Interest\V1\Rest\Interest\InterestTableGateway as TableGateway;
 
 /**
  * Mapper implementation using a Zend\Db\TableGateway
  */
-class UserTableGatewayMapper implements UserMapperInterface
+class InterestTableGatewayMapper implements InterestMapperInterface
 {
     /**
      * @var string Name of collection class

@@ -107,9 +107,115 @@ return [
             'table_name' => 'users',
             'hydrator_name' => \Zend\Hydrator\ObjectPropertyHydrator::class,
             'entity_identifier_name' => 'id',
-            'collection_class' => 'Account\\V1\\Rest\\User\\UserCollection',
-            'table_service' => 'Account\\V1\\Rest\\User\\UserTableGateway',
-            'table_mapper' => 'Account\\V1\\Rest\\User\\UserTableGatewayMapper',
+            'collection_class' => \Account\V1\Rest\User\UserCollection::class,
+            'table_service' => \Account\V1\Rest\User\UserTableGateway::class,
+            'table_mapper' => \Account\V1\Rest\User\UserTableGatewayMapper::class,
+        ],
+    ],
+    'zf-content-validation' => [
+        'Account\\V1\\Rest\\User\\Controller' => [
+            'input_filter' => 'Account\\V1\\Rest\\User\\Validator',
+        ],
+    ],
+    'input_filter_specs' => [
+        'Account\\V1\\Rest\\User\\Validator' => [
+            0 => [
+                'required' => true,
+                'validators' => [
+                    0 => [
+                        'name' => \Zend\Validator\StringLength::class,
+                        'options' => [
+                            'allowwhitespace' => false,
+                            'min' => '2',
+                        ],
+                    ],
+                ],
+                'filters' => [
+                    0 => [
+                        'name' => \Zend\Filter\StringTrim::class,
+                        'options' => [
+                            'charlist' => '',
+                        ],
+                    ],
+                    1 => [
+                        'name' => \Zend\Filter\StripTags::class,
+                        'options' => [],
+                    ],
+                    2 => [
+                        'name' => \Zend\Filter\UpperCaseWords::class,
+                        'options' => [],
+                    ],
+                ],
+                'name' => 'first_name',
+                'field_type' => 'string',
+                'error_message' => 'Invalid first name.',
+            ],
+            1 => [
+                'required' => true,
+                'validators' => [
+                    0 => [
+                        'name' => \Zend\Validator\StringLength::class,
+                        'options' => [
+                            'allowwhitespace' => false,
+                            'min' => '2',
+                        ],
+                    ],
+                ],
+                'filters' => [
+                    0 => [
+                        'name' => \Zend\Filter\StringTrim::class,
+                        'options' => [
+                            'charlist' => '',
+                        ],
+                    ],
+                    1 => [
+                        'name' => \Zend\Filter\StripTags::class,
+                        'options' => [],
+                    ],
+                    2 => [
+                        'name' => \Zend\Filter\UpperCaseWords::class,
+                        'options' => [],
+                    ],
+                ],
+                'name' => 'last_name',
+                'field_type' => 'string',
+                'error_message' => 'Invalid last name.',
+            ],
+            2 => [
+                'required' => true,
+                'validators' => [
+                    0 => [
+                        'name' => \Zend\Validator\EmailAddress::class,
+                        'options' => [],
+                    ],
+                    1 => [
+                        'name' => 'ZF\\ContentValidation\\Validator\\DbNoRecordExists',
+                        'options' => [
+                            'table' => 'users',
+                            'field' => 'email',
+                            'adapter' => 'dbAdapter',
+                            'schema' => 'seekinterest',
+                        ],
+                    ],
+                ],
+                'filters' => [
+                    0 => [
+                        'name' => \Zend\Filter\StringToLower::class,
+                        'options' => [],
+                    ],
+                    1 => [
+                        'name' => \Zend\Filter\StripTags::class,
+                        'options' => [],
+                    ],
+                    2 => [
+                        'name' => \Zend\Filter\StringTrim::class,
+                        'options' => [],
+                    ],
+                ],
+                'name' => 'email',
+                'field_type' => 'string',
+                'error_message' => 'Invalid email.',
+            ],
         ],
     ],
 ];

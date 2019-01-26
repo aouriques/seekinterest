@@ -4,7 +4,7 @@
  * @copyright Copyright (c) 2014 Zend Technologies USA Inc. (http://www.zend.com)
  */
 
-namespace Account\V1\Rest\User;
+namespace Interest\V1\Rest\Interest;
 
 use DomainException;
 
@@ -15,7 +15,7 @@ use DomainException;
  *
  * Otherwise, creates a TableGateway instance with the DB service and table.
  */
-class UserTableGatewayFactory
+class InterestTableGatewayFactory
 {
     public function __invoke($services)
     {
